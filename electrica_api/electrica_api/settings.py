@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -88,14 +88,12 @@ WSGI_APPLICATION = 'electrica_api.wsgi.application'
 }"""
 
 DATABASES = {
-    'default': {
-        'ENGINE':'django.db.backends.postgresql_psycopg2',  # database driver for mysql on django
-        'NAME': 'electrica_db',  # database name
-        'USER': 'postgres',  # database user
-        'PORT': '5433',  # database port
-        'PASSWORD': '123456'  # database password
+        'default': dj_database_url.config(
+        default='postgres://doadmin:AVNS_2_jq-LEL5t2tzkAxdy9@electrica2-do-user-13127230-0.b.db.ondigitalocean.com:25060/defaultdb',
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
     }
-}
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -142,7 +140,7 @@ USE_TZ = True
 PDF_URL = '/pdf/'
 PDF_ROOT = BASE_DIR / "facturas_pdf"
 
-STATIC_URL = 'static/'
+STATIC_URL = '/home/static/'
 STATIC_ROOT = BASE_DIR / "static"
 
 MEDIA_URL = '/media-files/'
